@@ -1,0 +1,109 @@
+/* styles/summary.css — Step 5: Summary */
+
+#summary-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.summary-card {
+  background: rgba(255, 255, 255, 0.022);
+  border: 1px solid var(--grid-subtle);
+  border-radius: 14px;
+  padding: 1.1rem 1.25rem;
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.summary-card:hover {
+  border-color: var(--grid-muted);
+  background: rgba(255, 255, 255, 0.032);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
+}
+
+.summary-card__heading {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary-glow);
+  margin-bottom: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid var(--grid-subtle);
+}
+
+.summary-card__heading a {
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  transition: color 0.18s;
+  border: 1px solid var(--grid-subtle);
+  padding: 2px 8px;
+  border-radius: 9999px;
+}
+
+.summary-card__heading a:hover {
+  color: var(--primary-glow);
+  border-color: rgba(52, 211, 153, 0.35);
+}
+
+.summary-kv {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.6rem 1rem;
+}
+
+.summary-kv dt {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.summary-kv dd {
+  font-size: 0.84rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Export Actions */
+.export-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.btn-export {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.btn-new {
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--grid-muted);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.btn-new:hover {
+  border-color: #fb7185;
+  color: #fb7185;
+  background: rgba(251, 113, 133, 0.06);
+}

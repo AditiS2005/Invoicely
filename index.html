@@ -3,46 +3,72 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InvoiceLy: Currated Invoice for Businesses</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>InvoiceLy — Beautiful Invoices for Freelancers & Businesses</title>
+    <meta
+      name="description"
+      content="InvoiceLy helps freelancers & small businesses create beautiful, professional invoices in seconds — no account required."
+    />
+    <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="icon" type="image/svg+xml" href="/assets/Logo.svg" />
+    <link rel="icon" type="image/svg+xml" href="./assets/Logo.svg" />
   </head>
   <body>
-    <main class="hero-container">
-      <header class="hero-header">
-        <div class="logo-box">
-          <img src="/assets/Logo.svg" alt="InvoiceLy Logo" />
+    <!-- ── Sticky Nav ──────────────────────────────── -->
+    <nav class="lp-nav">
+      <a href="#" class="lp-nav__brand">
+        <div class="lp-nav__logo-wrap">
+          <img src="./assets/Logo.svg" alt="InvoiceLy" />
         </div>
-        <div class="badge-container">
-          <span class="badge-emerald">InvoiceLy</span>
-        </div>
-      </header>
+        <span class="lp-nav__name">InvoiceLy</span>
+      </a>
+      <a href="pages/from-to.html" class="lp-nav__cta">
+        Get Started
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 12H19M19 12L12 5M19 12L12 19"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </nav>
 
-      <div class="hero-content">
-        <h1>
-          Invoices that Impress, <br />
-          <span class="text-highlight">Built in Seconds.</span>
+    <!-- ── Hero ───────────────────────────────────── -->
+    <section class="hero">
+      <div class="hero__glow" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="hero__eyebrow">
+          <span class="hero__badge">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+              <circle cx="5" cy="5" r="4" fill="#10b981" />
+            </svg>
+            Free · No account needed
+          </span>
+        </div>
+
+        <h1 class="hero__h1">
+          Invoices that Impress,<br />
+          <span class="hero__gradient-text">Built in Seconds.</span>
         </h1>
-        <p class="hero-subtext">
-          InvoiceLy helps freelancers & small businesses create beautiful,
-          professional invoices — no account required.
+
+        <p class="hero__sub">
+          InvoiceLy lets you create polished, professional invoices without
+          signing up. Fill in the details, preview live, and export as PDF —
+          done.
         </p>
 
-        <div class="cta-container">
-          <button class="btn-primary">
-            Get Started
-            <svg
-              class="arrow-icon"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
+        <div class="hero__actions">
+          <a href="pages/from-to.html" class="btn-hero-primary">
+            Create Invoice Free
+            <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
               <path
                 d="M5 12H19M19 12L12 5M19 12L12 19"
                 stroke="currentColor"
@@ -51,34 +77,319 @@
                 stroke-linejoin="round"
               />
             </svg>
-            <!-- when someone click to this it should redirect to the invoice page -->
-          </button>
+          </a>
+          <a href="#how-it-works" class="btn-hero-ghost">See how it works</a>
         </div>
+
+        <p class="hero__trust">Trusted by freelancers across 30+ countries</p>
       </div>
 
-      <section class="features-grid">
+      <!-- Mock Invoice Preview -->
+      <div class="hero__preview" aria-hidden="true">
+        <div class="preview-mock">
+          <div class="mock__header">
+            <div class="mock__from">
+              <div class="mock__logo-ph">
+                <img src="./assets/Logo.svg" alt="" />
+              </div>
+              <div>
+                <div class="mock__name">Acme Design Studio</div>
+                <div class="mock__detail">hello@acmestudio.io</div>
+                <div class="mock__detail">San Francisco, CA</div>
+              </div>
+            </div>
+            <div class="mock__meta">
+              <div class="mock__title">INVOICE</div>
+              <table class="mock__meta-table">
+                <tr>
+                  <td>Invoice #</td>
+                  <td>INV-0042</td>
+                </tr>
+                <tr>
+                  <td>Issue Date</td>
+                  <td>Feb 28, 2026</td>
+                </tr>
+                <tr>
+                  <td>Due Date</td>
+                  <td>Mar 14, 2026</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="mock__bill-to">
+            <div class="mock__section-label">Bill To</div>
+            <div class="mock__name">Bright Labs Inc.</div>
+            <div class="mock__detail">accounts@brightlabs.com</div>
+          </div>
+
+          <table class="mock__items">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Brand Identity Design</td>
+                <td>1</td>
+                <td>$2,400</td>
+                <td>$2,400</td>
+              </tr>
+              <tr>
+                <td>UI / UX Prototyping</td>
+                <td>3</td>
+                <td>$800</td>
+                <td>$2,400</td>
+              </tr>
+              <tr>
+                <td>Landing Page Development</td>
+                <td>1</td>
+                <td>$1,200</td>
+                <td>$1,200</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="mock__totals">
+            <div class="mock__total-row">
+              <span>Subtotal</span><span>$6,000.00</span>
+            </div>
+            <div class="mock__total-row">
+              <span>Tax (8%)</span><span>$480.00</span>
+            </div>
+            <div class="mock__total-row mock__total-row--grand">
+              <span>Total</span><span>$6,480.00</span>
+            </div>
+          </div>
+
+          <div class="mock__payment">
+            <div class="mock__section-label">Payment Details</div>
+            <div class="mock__detail">
+              Bank: Chase · Routing: ••••1234 · Account: ••••5678
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Social Proof / Trust Strip ─────────────── -->
+    <div class="trust-strip">
+      <div class="trust-strip__inner">
+        <span class="trust-strip__item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke="#10b981"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          No signup required
+        </span>
+        <span class="trust-strip__sep" aria-hidden="true">·</span>
+        <span class="trust-strip__item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke="#10b981"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          100% free forever
+        </span>
+        <span class="trust-strip__sep" aria-hidden="true">·</span>
+        <span class="trust-strip__item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke="#10b981"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          Live PDF preview
+        </span>
+        <span class="trust-strip__sep" aria-hidden="true">·</span>
+        <span class="trust-strip__item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+            <path
+              d="M9 12l2 2 4-4M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              stroke="#10b981"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          5-step guided flow
+        </span>
+      </div>
+    </div>
+
+    <!-- ── Features ───────────────────────────────── -->
+    <section class="features" id="features">
+      <div class="section-header">
+        <div class="section-badge">Features</div>
+        <h2 class="section-title">Everything you need, nothing you don't</h2>
+        <p class="section-sub">Built for speed. Designed for clarity.</p>
+      </div>
+
+      <div class="features-grid">
         <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <div class="feature-info">
+          <div class="feature-card__icon">⚡</div>
+          <div>
             <h3>Instant Generation</h3>
-            <p>Create professional invoices in seconds.</p>
+            <p>
+              Fill in your details and get a professional invoice in under 60
+              seconds.
+            </p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">🎨</div>
-          <div class="feature-info">
-            <h3>Customizable</h3>
-            <p>Tailor every detail to your brand.</p>
+          <div class="feature-card__icon">🎨</div>
+          <div>
+            <h3>Fully Customizable</h3>
+            <p>
+              Add your logo, brand colors, and tailor every field to match your
+              business.
+            </p>
           </div>
         </div>
         <div class="feature-card">
-          <div class="feature-icon">📥</div>
-          <div class="feature-info">
-            <h3>Easy Export</h3>
-            <p>Download as PDF with one click.</p>
+          <div class="feature-card__icon">👁️</div>
+          <div>
+            <h3>Live Preview</h3>
+            <p>
+              See exactly what your invoice looks like as you type — no
+              surprises.
+            </p>
           </div>
         </div>
-      </section>
-    </main>
+        <div class="feature-card">
+          <div class="feature-card__icon">📥</div>
+          <div>
+            <h3>One-Click PDF Export</h3>
+            <p>
+              Download a pixel-perfect PDF invoice ready to send to any client.
+            </p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">💰</div>
+          <div>
+            <h3>Tax & Totals</h3>
+            <p>
+              Automatic subtotal, tax, and grand total calculation. Zero math
+              needed.
+            </p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card__icon">🔒</div>
+          <div>
+            <h3>Fully Private</h3>
+            <p>
+              Your data stays in your browser. Nothing is stored on our servers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── How It Works ───────────────────────────── -->
+    <section class="how-it-works" id="how-it-works">
+      <div class="section-header">
+        <div class="section-badge">How It Works</div>
+        <h2 class="section-title">From zero to invoice in 5 easy steps</h2>
+        <p class="section-sub">No learning curve. No confusion.</p>
+      </div>
+
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-item__num">01</div>
+          <div class="step-item__body">
+            <h3>Enter From & To</h3>
+            <p>Fill in your business details and your client's contact info.</p>
+          </div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item">
+          <div class="step-item__num">02</div>
+          <div class="step-item__body">
+            <h3>Add Invoice Details</h3>
+            <p>
+              Set the invoice number, dates, currency, and optionally upload
+              your logo.
+            </p>
+          </div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item">
+          <div class="step-item__num">03</div>
+          <div class="step-item__body">
+            <h3>Add Line Items</h3>
+            <p>
+              List your services with quantity and rate. Totals calculate
+              automatically.
+            </p>
+          </div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item">
+          <div class="step-item__num">04</div>
+          <div class="step-item__body">
+            <h3>Set Payment Details</h3>
+            <p>Add your bank account details and any payment notes or terms.</p>
+          </div>
+        </div>
+        <div class="step-connector" aria-hidden="true"></div>
+        <div class="step-item">
+          <div class="step-item__num">05</div>
+          <div class="step-item__body">
+            <h3>Review & Export</h3>
+            <p>Review your invoice summary and download it as a PDF.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CTA Banner ──────────────────────────────── -->
+    <section class="cta-banner">
+      <div class="cta-banner__glow" aria-hidden="true"></div>
+      <h2 class="cta-banner__title">Ready to send your first invoice?</h2>
+      <p class="cta-banner__sub">
+        No signup. No credit card. Just open and start.
+      </p>
+      <a href="pages/from-to.html" class="btn-hero-primary">
+        Create Invoice Free
+        <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
+          <path
+            d="M5 12H19M19 12L12 5M19 12L12 19"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </a>
+    </section>
+
+    <!-- ── Footer ─────────────────────────────────── -->
+    <footer class="lp-footer">
+      <div class="lp-footer__brand">
+        <img src="./assets/Logo.svg" alt="InvoiceLy" class="lp-footer__logo" />
+        <span>InvoiceLy</span>
+      </div>
+      <p class="lp-footer__copy">
+        © 2026 InvoiceLy.
+      </p>
+    </footer>
   </body>
 </html>

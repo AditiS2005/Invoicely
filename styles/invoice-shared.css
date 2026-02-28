@@ -1,0 +1,639 @@
+/* ============================================================
+   styles/invoice-shared.css
+   Shared layout: nav, step pills, two-column frame,
+   field components, preview panel, buttons
+   ============================================================ */
+
+.invoice-body {
+  display: block;
+  min-height: 100vh;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(
+      ellipse 80% 40% at 50% 0%,
+      rgba(16, 185, 129, 0.07) 0%,
+      transparent 60%
+    ),
+    linear-gradient(var(--grid-subtle) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-subtle) 1px, transparent 1px);
+  background-size:
+    100% 100%,
+    40px 40px,
+    40px 40px;
+  justify-content: unset;
+  align-items: unset;
+}
+
+/* ── Top Nav ─────────────────────────────────────────────── */
+
+.inv-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.7rem 2rem;
+  background: rgba(12, 12, 14, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  box-shadow:
+    0 1px 0 rgba(16, 185, 129, 0.06),
+    0 4px 20px rgba(0, 0, 0, 0.25);
+  gap: 1rem;
+}
+
+.inv-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.inv-nav__logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 3px;
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.12);
+  transition:
+    box-shadow 0.2s,
+    border-color 0.2s;
+}
+
+.inv-nav__brand:hover .inv-nav__logo {
+  border-color: rgba(52, 211, 153, 0.55);
+  box-shadow: 0 0 18px rgba(16, 185, 129, 0.22);
+}
+
+.inv-nav__name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+/* ── Step Pills ───────────────────────────────────────────── */
+
+.inv-steps {
+  display: flex;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--grid-subtle);
+  border-radius: 9999px;
+  padding: 0.3rem;
+}
+
+.step-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.32rem 0.82rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    color 0.2s,
+    background 0.2s,
+    border-color 0.2s;
+  white-space: nowrap;
+}
+
+.step-btn:hover:not(.active) {
+  color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.step-btn.active {
+  background: var(--primary);
+  color: #fff;
+  border-color: transparent;
+  box-shadow:
+    0 0 0 1px rgba(52, 211, 153, 0.3),
+    0 2px 12px rgba(16, 185, 129, 0.4);
+}
+
+.step-btn.done {
+  color: var(--text-secondary);
+}
+
+.step-btn.done .step-num {
+  background: var(--primary);
+  color: #fff;
+}
+
+.step-num {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--grid-muted);
+  display: grid;
+  place-items: center;
+  font-size: 0.62rem;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: background 0.2s;
+}
+
+.step-btn.active .step-num {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* ── Two-Column Main Layout ───────────────────────────────── */
+
+.inv-main {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: 1.5rem;
+  padding: 1.75rem 2rem;
+  max-width: 1300px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+/* ── Form Panel ───────────────────────────────────────────── */
+
+.inv-form-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-header {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--grid-subtle);
+}
+
+.form-header h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+  letter-spacing: -0.02em;
+}
+
+.form-header p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ── Field Primitives ─────────────────────────────────────── */
+
+.field-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.field-group label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.field-group input,
+.field-group select,
+.field-group textarea {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--grid-subtle);
+  border-radius: 9px;
+  padding: 0.6rem 0.8rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.84rem;
+  outline: none;
+  width: 100%;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    box-shadow 0.2s;
+}
+
+.field-group input:hover,
+.field-group select:hover,
+.field-group textarea:hover {
+  border-color: var(--grid-muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.field-group input:focus,
+.field-group select:focus,
+.field-group textarea:focus {
+  border-color: var(--primary);
+  background: rgba(16, 185, 129, 0.04);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.field-group input::placeholder,
+.field-group textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.field-group select option {
+  background: var(--bg-dark);
+}
+
+.field-group textarea {
+  resize: vertical;
+  min-height: 88px;
+  line-height: 1.6;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+/* ── Section Card ─────────────────────────────────────────── */
+
+.section-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--grid-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  transition: border-color 0.2s;
+}
+
+.section-card:hover {
+  border-color: var(--grid-muted);
+}
+
+.section-card__label {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--grid-subtle);
+}
+
+/* ── Buttons ──────────────────────────────────────────────── */
+
+.btn-next {
+  padding: 0.625rem 1.6rem;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary) 0%, #0ea472 100%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: 0.01em;
+  transition:
+    background 0.2s,
+    box-shadow 0.2s,
+    transform 0.15s;
+  box-shadow: 0 4px 16px rgba(16, 185, 129, 0.4);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-next:hover {
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.52);
+  transform: translateY(-1px);
+}
+
+.btn-next:active {
+  transform: translateY(0);
+}
+
+.btn-back {
+  padding: 0.625rem 1.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--grid-muted);
+  background: transparent;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+
+.btn-back:hover {
+  border-color: var(--text-secondary);
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.step-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 0.75rem;
+}
+
+.step-actions--right {
+  justify-content: flex-end;
+}
+
+/* ── Preview Panel (right column) ─────────────────────────── */
+
+.inv-preview-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+  position: sticky;
+  top: 68px;
+  max-height: calc(100vh - 84px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--grid-muted) transparent;
+}
+
+.preview-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.preview-header h3 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.preview-header p {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-top: 0.15rem;
+}
+
+.btn-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.42rem 0.95rem;
+  border-radius: 9999px;
+  border: none;
+  background: linear-gradient(135deg, var(--primary) 0%, #0ea472 100%);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    box-shadow 0.2s,
+    transform 0.15s;
+  box-shadow: 0 3px 12px rgba(16, 185, 129, 0.38);
+}
+
+.btn-pdf:hover {
+  box-shadow: 0 5px 18px rgba(16, 185, 129, 0.5);
+  transform: translateY(-1px);
+}
+
+/* ── Invoice Document Card ─────────────────────────────────── */
+
+.preview-document {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.75rem 1.5rem;
+  color: #111;
+  font-size: 0.78rem;
+  line-height: 1.55;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.06),
+    0 8px 48px rgba(0, 0, 0, 0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Header row: from + invoice title */
+.prev-doc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.prev-from-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.625rem;
+}
+
+.logo-placeholder {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  background: #f3f4f6;
+  display: grid;
+  place-items: center;
+  font-size: 0.46rem;
+  font-weight: 700;
+  color: #9ca3af;
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  border: 1px solid #e5e7eb;
+}
+
+.logo-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.prev-name {
+  font-weight: 700;
+  font-size: 0.84rem;
+  color: #111;
+}
+
+.prev-detail {
+  color: #6b7280;
+  font-size: 0.72rem;
+}
+
+.prev-meta {
+  text-align: right;
+}
+
+.prev-invoice-title {
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #10b981;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+
+.prev-meta-table td {
+  padding: 0.07rem 0.4rem;
+  font-size: 0.7rem;
+}
+
+.prev-meta-table td:first-child {
+  color: #9ca3af;
+}
+.prev-meta-table td:last-child {
+  font-weight: 600;
+  color: #111;
+}
+
+/* Bill To */
+.prev-bill-to {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.9rem;
+}
+
+.section-label {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #10b981;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+/* Items Table */
+.prev-items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prev-items-table th {
+  background: #f9fafb;
+  padding: 0.42rem 0.55rem;
+  text-align: left;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.prev-items-table th:last-child,
+.prev-items-table td:last-child {
+  text-align: right;
+}
+
+.prev-items-table td {
+  padding: 0.42rem 0.55rem;
+  border-bottom: 1px solid #f5f5f5;
+  color: #374151;
+  font-size: 0.75rem;
+}
+
+.prev-empty-row {
+  text-align: center !important;
+  color: #d1d5db;
+  font-style: italic;
+  padding: 0.75rem !important;
+}
+
+/* Totals */
+.prev-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-self: flex-end;
+  min-width: 190px;
+}
+
+.prev-total-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.prev-total-row--grand {
+  border-top: 2px solid #10b981;
+  padding-top: 0.4rem;
+  margin-top: 0.1rem;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: #10b981;
+}
+
+/* Payment */
+.prev-payment {
+  border-top: 1px solid #f0f0f0;
+  padding-top: 0.9rem;
+}
+
+/* ── Print ─────────────────────────────────────────────────── */
+@media print {
+  .inv-nav,
+  .inv-form-panel,
+  .preview-header {
+    display: none !important;
+  }
+  .invoice-body {
+    background: #fff !important;
+    display: block;
+  }
+  .inv-main {
+    display: block;
+    padding: 0;
+  }
+  .inv-preview-panel {
+    position: static;
+    height: auto;
+    overflow: visible;
+  }
+  .preview-document {
+    box-shadow: none;
+  }
+}
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .inv-main {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+  .inv-preview-panel {
+    position: static;
+    max-height: none;
+  }
+  .inv-steps {
+    display: none;
+  }
+}

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>From &amp; To — InvoiceLy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" type="image/svg+xml" href="../assets/Logo.svg" />
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../styles/invoice-shared.css" />
+    <link rel="stylesheet" href="../styles/from-to.css" />
+  </head>
+  <body class="invoice-body">
+    <header class="inv-nav">
+      <a href="../index.html" class="inv-nav__brand">
+        <img src="../assets/Logo.svg" alt="InvoiceLy" class="inv-nav__logo" />
+        <span class="inv-nav__name">InvoiceLy</span>
+      </a>
+      <nav class="inv-steps">
+        <a href="from-to.html" class="step-btn active"
+          ><span class="step-num">1</span> From &amp; To</a
+        >
+        <a href="invoice-details.html" class="step-btn"
+          ><span class="step-num">2</span> Invoice Details</a
+        >
+        <a href="items.html" class="step-btn"
+          ><span class="step-num">3</span> Items</a
+        >
+        <a href="payment-details.html" class="step-btn"
+          ><span class="step-num">4</span> Payment Details</a
+        >
+        <a href="summary.html" class="step-btn"
+          ><span class="step-num">5</span> Summary</a
+        >
+      </nav>
+    </header>
+
+    <main class="inv-main">
+      <section class="inv-form-panel">
+        <div class="form-header">
+          <h2>From &amp; To</h2>
+          <p>Enter sender and recipient information</p>
+        </div>
+
+        <div class="from-to-grid">
+          <div class="party-card">
+            <div class="party-card__title">
+              <span class="dot dot--from"></span> Bill From
+            </div>
+            <div class="field-group">
+              <label>Name</label>
+              <input type="text" id="from-name" placeholder="Your name" />
+            </div>
+            <div class="field-group">
+              <label>Address</label>
+              <input type="text" id="from-address" placeholder="Your address" />
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>ZIP</label>
+                <input type="text" id="from-zip" placeholder="ZIP" />
+              </div>
+              <div class="field-group">
+                <label>City</label>
+                <input type="text" id="from-city" placeholder="City" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Country</label>
+              <input type="text" id="from-country" placeholder="Country" />
+            </div>
+            <div class="field-group">
+              <label>Email</label>
+              <input type="email" id="from-email" placeholder="Your email" />
+            </div>
+            <div class="field-group">
+              <label>Phone</label>
+              <input type="tel" id="from-phone" placeholder="Your phone" />
+            </div>
+          </div>
+
+          <div class="party-card">
+            <div class="party-card__title">
+              <span class="dot dot--to"></span> Bill To
+            </div>
+            <div class="field-group">
+              <label>Name</label>
+              <input type="text" id="to-name" placeholder="Receiver name" />
+            </div>
+            <div class="field-group">
+              <label>Address</label>
+              <input
+                type="text"
+                id="to-address"
+                placeholder="Receiver address"
+              />
+            </div>
+            <div class="field-row">
+              <div class="field-group">
+                <label>ZIP</label>
+                <input type="text" id="to-zip" placeholder="ZIP" />
+              </div>
+              <div class="field-group">
+                <label>City</label>
+                <input type="text" id="to-city" placeholder="City" />
+              </div>
+            </div>
+            <div class="field-group">
+              <label>Country</label>
+              <input type="text" id="to-country" placeholder="Country" />
+            </div>
+            <div class="field-group">
+              <label>Email</label>
+              <input type="email" id="to-email" placeholder="Receiver email" />
+            </div>
+            <div class="field-group">
+              <label>Phone</label>
+              <input type="tel" id="to-phone" placeholder="Receiver phone" />
+            </div>
+          </div>
+        </div>
+
+        <div class="step-actions step-actions--right">
+          <a href="invoice-details.html" class="btn-next" id="nextBtn"
+            >Next →</a
+          >
+        </div>
+      </section>
+
+      <aside class="inv-preview-panel">
+        <div class="preview-header">
+          <div>
+            <h3>Live Preview</h3>
+            <p>Updates as you fill in each section</p>
+          </div>
+          <button class="btn-pdf" onclick="exportPDF()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <path
+                d="M12 3v12M12 15l-4-4M12 15l4-4M3 21h18"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Save as PDF
+          </button>
+        </div>
+
+        <div class="preview-document">
+          <div class="prev-doc-header">
+            <div class="prev-from-block">
+              <div class="logo-placeholder" id="prev-logo-placeholder">
+                LOGO
+                <img id="prev-logo-img" src="" alt="" hidden />
+              </div>
+              <div>
+                <p class="prev-name" id="prev-from-name">—</p>
+                <p class="prev-detail" id="prev-from-address">—</p>
+                <p class="prev-detail" id="prev-from-email">—</p>
+              </div>
+            </div>
+            <div class="prev-meta">
+              <h1 class="prev-invoice-title">INVOICE</h1>
+              <table class="prev-meta-table">
+                <tr>
+                  <td>Invoice #</td>
+                  <td id="prev-inv-number">—</td>
+                </tr>
+                <tr>
+                  <td>Issue Date</td>
+                  <td id="prev-issue-date">—</td>
+                </tr>
+                <tr>
+                  <td>Due Date</td>
+                  <td id="prev-due-date">—</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+
+          <div class="prev-bill-to">
+            <p class="section-label">Bill To</p>
+            <p class="prev-name" id="prev-to-name">—</p>
+            <p class="prev-detail" id="prev-to-address">—</p>
+            <p class="prev-detail" id="prev-to-email">—</p>
+          </div>
+
+          <table class="prev-items-table">
+            <thead>
+              <tr>
+                <th>Description</th>
+                <th>Qty</th>
+                <th>Rate</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody id="prev-items-body">
+              <tr>
+                <td colspan="4" class="prev-empty-row">No items added yet</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="prev-totals">
+            <div class="prev-total-row">
+              <span>Subtotal</span><span id="prev-subtotal">—</span>
+            </div>
+            <div class="prev-total-row">
+              <span>Tax</span><span id="prev-tax">—</span>
+            </div>
+            <div class="prev-total-row prev-total-row--grand">
+              <span>Total</span><span id="prev-grand">—</span>
+            </div>
+          </div>
+
+          <div class="prev-payment">
+            <p class="section-label">Payment Details</p>
+            <p class="prev-detail" id="prev-bank">—</p>
+            <p class="prev-detail" id="prev-routing">—</p>
+            <p class="prev-detail" id="prev-notes">—</p>
+          </div>
+        </div>
+      </aside>
+    </main>
+
+    <script src="../scripts/state.js"></script>
+    <script src="../scripts/from-to.js"></script>
+  </body>
+</html>

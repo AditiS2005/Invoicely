@@ -41,9 +41,13 @@ InvoiceLy walks you through a **5-step guided flow**:
 
 ## 🛠️ Tech Stack
 
-- **HTML5** — Semantic, multi-page structure
-- **CSS3** — Modular stylesheets with CSS custom properties (design tokens)
-- **Vanilla JS** — Lightweight, dependency-free logic with `localStorage` state management
+This project is a **full‑stack** JavaScript application combining a static frontend with a lightweight Node/Express API and MongoDB for persistence.
+
+- **HTML5 & CSS3** — Semantic, multi‑page frontend with modular stylesheets and design tokens
+- **Vanilla JavaScript** — Frontend logic uses `localStorage` for state and PDF export
+- **Node.js / Express** — RESTful API powering the backend and serving the static files
+- **MongoDB & Mongoose** — Database for storing invoices (connected via `src/config/db.Connect.js`)
+- **dotenv** — Environment variable management
 - **Google Fonts** — Montserrat typeface
 
 ---
@@ -52,17 +56,17 @@ InvoiceLy walks you through a **5-step guided flow**:
 
 ```
 Invoicely/
-├── index.html                  # Landing page
+├── index.html                  # Landing page (served statically by Express)
 ├── style.css                   # Global styles & design tokens
 │
-├── pages/
+├── pages/                      # Frontend multi‑page flow
 │   ├── from-to.html            # Step 1 — Sender & recipient details
 │   ├── invoice-details.html    # Step 2 — Invoice metadata & logo
 │   ├── items.html              # Step 3 — Line items
 │   ├── payment-details.html    # Step 4 — Payment information
 │   └── summary.html            # Step 5 — Review & PDF export
 │
-├── scripts/
+├── scripts/                    # Frontend JavaScript
 │   ├── state.js                # Shared localStorage state management
 │   ├── index.js                # Landing page script
 │   ├── from-to.js              # Step 1 logic
@@ -71,7 +75,7 @@ Invoicely/
 │   ├── payment-details.js      # Step 4 logic
 │   └── summary.js              # Step 5 logic & PDF generation
 │
-├── styles/
+├── styles/                     # Page‑specific stylesheets
 │   ├── invoice-shared.css      # Shared invoice page styles
 │   ├── from-to.css             # Step 1 styles
 │   ├── invoice-details.css     # Step 2 styles
@@ -79,9 +83,18 @@ Invoicely/
 │   ├── payment-details.css     # Step 4 styles
 │   └── summary.css             # Step 5 styles
 │
-└── assets/
-    ├── Logo.svg                # InvoiceLy brand logo
-    └── image.png               # Landing page screenshot
+├── assets/                     # Static assets
+│   ├── Logo.svg                # InvoiceLy brand logo
+│   └── image.png               # Landing page screenshot
+│
+└── src/                        # Backend source code (Node/Express)
+    ├── index.js                # Server entrypoint
+    ├── config/
+    │   └── db.Connect.js       # MongoDB connection helper
+    ├── controllers/            # Request handlers (invoices, users, etc.)
+    ├── middlewares/            # Custom Express middleware
+    ├── models/                 # Mongoose schemas
+    └── routes/                 # API route definitions
 ```
 
 ---

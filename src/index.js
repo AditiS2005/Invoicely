@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv').config()
 const dbConnect = require('./config/db.Connect')
+const authRoutes = require('./routes/authRoutes')
 
 const app = express()
 
@@ -11,6 +12,7 @@ app.use(express.json())
 dbConnect()
 
 // routes
+app.use('/api/auth', authRoutes)
 
 // server start
 const PORT = process.env.PORT || 7002

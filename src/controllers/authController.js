@@ -14,6 +14,9 @@ const register = async (req, res) => {
       .status(201)
       .json({ message: `User registered with username ${username}` })
   } catch (error) {
+    if (error.code === 11000) {
+      return res.status(409).json({ message: 'Username already exists' })
+    }
     res
       .status(500)
       .json({ message: `Error registering user:  ${error.message}` })
@@ -26,12 +29,12 @@ const login = async (req, res) => {
       const user = await User.findOne({ username })
       if (!user) {
         return res
-          .status(404)
-          .json({ message: `user not found with username: ${username}` })
+          .status(401)
+          .json({ message: 'Invalid username or password' })
       }
       const isMatch = await bcrypt.compare(password, user.password)
       if (!isMatch) {
-        return res.status(400).json({ message: 'Invalid password' })
+        return res.status(401).json({ message: 'Invalid username or password' })
       }
       const token = jwt.sign(
         { id: user._id, role: user.role },

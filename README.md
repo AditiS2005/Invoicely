@@ -16,14 +16,15 @@
 
 ## ✨ Features
 
-| Feature                     | Description                                                  |
-| --------------------------- | ------------------------------------------------------------ |
-| ⚡ **Instant Generation**   | Go from zero to a finished invoice in under 60 seconds       |
-| 🎨 **Fully Customizable**   | Add your logo, set currency, and tailor every field          |
-| 👁️ **Live Preview**         | See what your invoice looks like as you type                 |
-| 📥 **One-Click PDF Export** | Download a pixel-perfect PDF ready to send                   |
-| 💰 **Auto Tax & Totals**    | Subtotal, tax, and grand total calculated automatically      |
-| 🔒 **100% Private**         | All data lives in your browser — nothing is sent to a server |
+| Feature                     | Description                                              |
+| --------------------------- | -------------------------------------------------------- |
+| ⚡ **Instant Generation**   | Go from zero to a finished invoice in under 60 seconds   |
+| 🎨 **Fully Customizable**   | Add your logo, set currency, and tailor every field      |
+| 👁️ **Live Preview**         | See what your invoice looks like as you type             |
+| 📥 **One-Click PDF Export** | Download a pixel-perfect PDF ready to send               |
+| 💰 **Auto Tax & Totals**    | Subtotal, tax, and grand total calculated automatically  |
+| 🔐 **Secure Access**        | JWT authentication with Role-Based Access Control (RBAC) |
+| 🔌 **REST API Integration** | Express backend managing users and secure endpoints      |
 
 ---
 
@@ -46,7 +47,8 @@ This project is a **full‑stack** JavaScript application combining a static fro
 - **HTML5 & CSS3** — Semantic, multi‑page frontend with modular stylesheets and design tokens
 - **Vanilla JavaScript** — Frontend logic uses `localStorage` for state and PDF export
 - **Node.js / Express** — RESTful API powering the backend and serving the static files
-- **MongoDB & Mongoose** — Database for storing invoices (connected via `src/config/db.Connect.js`)
+- **MongoDB & Mongoose** — Database for storing data securely
+- **JWT & Bcrypt** — Authentication, encrypted passwords, and RBAC implementation
 - **dotenv** — Environment variable management
 - **Google Fonts** — Montserrat typeface
 
@@ -98,7 +100,5 @@ Invoicely/
 ```
 
 ---
-
-
 
 <p align="center">© 2026 InvoiceLy</p>

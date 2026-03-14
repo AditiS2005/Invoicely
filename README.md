@@ -93,10 +93,16 @@ Invoicely/
     ├── index.js                # Server entrypoint
     ├── config/
     │   └── db.Connect.js       # MongoDB connection helper
-    ├── controllers/            # Request handlers (invoices, users, etc.)
-    ├── middlewares/            # Custom Express middleware
+    ├── controllers/            # Request handlers
+    │   └── authController.js   # Logic for registration and login
+    ├── middlewares/            # Custom Express middlewares
+    │   ├── authMiddleware.js   # JWT verification middleware
+    │   └── roleMiddleware.js   # Role-Based Access Control (RBAC)
     ├── models/                 # Mongoose schemas
+    │   └── userModel.js        # User schema with roles and hashed passwords
     └── routes/                 # API route definitions
+        ├── authRoutes.js       # Public authentication routes
+        └── userRoutes.js       # Protected and role-specific routes
 ```
 
 ---

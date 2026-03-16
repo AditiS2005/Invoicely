@@ -253,6 +253,29 @@ body {
   transform: translateY(-1px);
 }
 
+.lp-nav__signin {
+  display: inline-flex;
+  align-items: center;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 0.9rem;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  border: 1px solid var(--border-subtle);
+  transition:
+    color 0.2s,
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.lp-nav__signin:hover {
+  color: var(--text-secondary);
+  border-color: var(--border-muted);
+  background: rgba(255, 255, 255, 0.04);
+}
+
 /* ── Hero ───────────────────────────────────────── */
 .hero {
   position: relative;

@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>InvoiceLy — Beautiful Invoices for Freelancers & Businesses</title>
+    <title>InvoiceLy — Export Invoice Manager</title>
     <meta
       name="description"
-      content="InvoiceLy helps freelancers & small businesses create beautiful, professional invoices in seconds — no account required."
+      content="InvoiceLy helps exporters create professional invoices for vegetables and chili shipments with a secure login flow."
     />
     <link rel="stylesheet" href="./style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -27,8 +27,8 @@
         <span class="lp-nav__name">InvoiceLy</span>
       </a>
       <div style="display: flex; align-items: center; gap: 0.6rem">
-        <a href="pages/login.html" class="lp-nav__signin">Sign In</a>
-        <a href="pages/from-to.html" class="lp-nav__cta">
+        <a href="pages/login.html" class="lp-nav__signin" id="navSignInBtn">Sign In</a>
+        <a href="pages/login.html" class="lp-nav__cta" id="navCtaBtn">
           Get Started
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
             <path
@@ -53,7 +53,7 @@
             <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
               <circle cx="5" cy="5" r="4" fill="#10b981" />
             </svg>
-            Free · No account needed
+            Secure Access · Login Required
           </span>
         </div>
 
@@ -63,14 +63,14 @@
         </h1>
 
         <p class="hero__sub">
-          InvoiceLy lets you create polished, professional invoices without
-          signing up. Fill in the details, preview live, and export as PDF —
-          done.
+          InvoiceLy helps your team create polished export invoices for
+          vegetables and chili shipments. Sign in, fill in details, preview
+          live, and export as PDF.
         </p>
 
         <div class="hero__actions">
-          <a href="pages/from-to.html" class="btn-hero-primary">
-            Create Invoice Free
+          <a href="pages/login.html" class="btn-hero-primary" id="heroCtaBtn">
+            Sign In to Create Invoice
             <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
               <path
                 d="M5 12H19M19 12L12 5M19 12L12 19"
@@ -84,7 +84,6 @@
           <a href="#how-it-works" class="btn-hero-ghost">See how it works</a>
         </div>
 
-        <p class="hero__trust">Trusted by freelancers across 30+ countries</p>
       </div>
 
       <!-- Mock Invoice Preview -->
@@ -96,25 +95,25 @@
                 <img src="./assets/Logo.svg" alt="" />
               </div>
               <div>
-                <div class="mock__name">Acme Design Studio</div>
-                <div class="mock__detail">hello@acmestudio.io</div>
-                <div class="mock__detail">San Francisco, CA</div>
+                <div class="mock__name">GreenHarvest Exports</div>
+                <div class="mock__detail">accounts@greenharvestexports.com</div>
+                <div class="mock__detail">Nashik, Maharashtra, India</div>
               </div>
             </div>
             <div class="mock__meta">
-              <div class="mock__title">INVOICE</div>
+              <div class="mock__title">DVC- Diplaxmi Vegetable Company</div>
               <table class="mock__meta-table">
                 <tr>
                   <td>Invoice #</td>
-                  <td>INV-0042</td>
+                  <td>EXP-2026-042</td>
                 </tr>
                 <tr>
                   <td>Issue Date</td>
-                  <td>Feb 28, 2026</td>
+                  <td>Apr 10, 2026</td>
                 </tr>
                 <tr>
                   <td>Due Date</td>
-                  <td>Mar 14, 2026</td>
+                  <td>Apr 24, 2026</td>
                 </tr>
               </table>
             </div>
@@ -122,8 +121,8 @@
 
           <div class="mock__bill-to">
             <div class="mock__section-label">Bill To</div>
-            <div class="mock__name">Bright Labs Inc.</div>
-            <div class="mock__detail">accounts@brightlabs.com</div>
+            <div class="mock__name">FreshMart Trading LLC</div>
+            <div class="mock__detail">payables@freshmarttrading.ae</div>
           </div>
 
           <table class="mock__items">
@@ -137,42 +136,42 @@
             </thead>
             <tbody>
               <tr>
-                <td>Brand Identity Design</td>
-                <td>1</td>
-                <td>$2,400</td>
-                <td>$2,400</td>
+                <td>Red Chili (Dry) - Grade A</td>
+                <td>1,200 kg</td>
+                <td>$2.10</td>
+                <td>$2,520</td>
               </tr>
               <tr>
-                <td>UI / UX Prototyping</td>
-                <td>3</td>
-                <td>$800</td>
-                <td>$2,400</td>
+                <td>Green Chili - Fresh</td>
+                <td>900 kg</td>
+                <td>$1.80</td>
+                <td>$1,620</td>
               </tr>
               <tr>
-                <td>Landing Page Development</td>
-                <td>1</td>
-                <td>$1,200</td>
-                <td>$1,200</td>
+                <td>Mixed Vegetables Crates</td>
+                <td>150 crates</td>
+                <td>$18.00</td>
+                <td>$2,700</td>
               </tr>
             </tbody>
           </table>
 
           <div class="mock__totals">
             <div class="mock__total-row">
-              <span>Subtotal</span><span>$6,000.00</span>
+              <span>Subtotal</span><span>$6,840.00</span>
             </div>
             <div class="mock__total-row">
-              <span>Tax (8%)</span><span>$480.00</span>
+              <span>Tax (5%)</span><span>$342.00</span>
             </div>
             <div class="mock__total-row mock__total-row--grand">
-              <span>Total</span><span>$6,480.00</span>
+              <span>Total</span><span>$7,182.00</span>
             </div>
           </div>
 
           <div class="mock__payment">
             <div class="mock__section-label">Payment Details</div>
             <div class="mock__detail">
-              Bank: Chase · Routing: ••••1234 · Account: ••••5678
+              Bank: SBI Export Desk · Routing: SBIN0004488 · Account: ••••2091
             </div>
           </div>
         </div>
@@ -192,7 +191,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          No signup required
+          Login required for access
         </span>
         <span class="trust-strip__sep" aria-hidden="true">·</span>
         <span class="trust-strip__item">
@@ -205,7 +204,7 @@
               stroke-linejoin="round"
             />
           </svg>
-          100% free forever
+          Built for export invoicing
         </span>
         <span class="trust-strip__sep" aria-hidden="true">·</span>
         <span class="trust-strip__item">
@@ -240,7 +239,7 @@
     <section class="features" id="features">
       <div class="section-header">
         <div class="section-badge">Features</div>
-        <h2 class="section-title">Everything you need, nothing you don't</h2>
+        <h2 class="section-title">Everything you need for export invoices</h2>
         <p class="section-sub">Built for speed. Designed for clarity.</p>
       </div>
 
@@ -250,8 +249,8 @@
           <div>
             <h3>Instant Generation</h3>
             <p>
-              Fill in your details and get a professional invoice in under 60
-              seconds.
+              Fill in shipment details and generate a clean export invoice in
+              under 60 seconds.
             </p>
           </div>
         </div>
@@ -260,7 +259,7 @@
           <div>
             <h3>Fully Customizable</h3>
             <p>
-              Add your logo, brand colors, and tailor every field to match your
+              Add your logo and tailor invoice fields to match your export
               business.
             </p>
           </div>
@@ -270,8 +269,7 @@
           <div>
             <h3>Live Preview</h3>
             <p>
-              See exactly what your invoice looks like as you type — no
-              surprises.
+              See your invoice update as you type before you export.
             </p>
           </div>
         </div>
@@ -280,7 +278,7 @@
           <div>
             <h3>One-Click PDF Export</h3>
             <p>
-              Download a pixel-perfect PDF invoice ready to send to any client.
+              Download a print-ready PDF invoice ready for buyers and agents.
             </p>
           </div>
         </div>
@@ -289,8 +287,8 @@
           <div>
             <h3>Tax & Totals</h3>
             <p>
-              Automatic subtotal, tax, and grand total calculation. Zero math
-              needed.
+              Automatic subtotal, tax, and total calculations for every
+              shipment line item.
             </p>
           </div>
         </div>
@@ -299,7 +297,7 @@
           <div>
             <h3>Fully Private</h3>
             <p>
-              Your data stays in your browser. Nothing is stored on our servers.
+              Secure login flow to protect invoice access for your team.
             </p>
           </div>
         </div>
@@ -367,11 +365,9 @@
     <section class="cta-banner">
       <div class="cta-banner__glow" aria-hidden="true"></div>
       <h2 class="cta-banner__title">Ready to send your first invoice?</h2>
-      <p class="cta-banner__sub">
-        No signup. No credit card. Just open and start.
-      </p>
-      <a href="pages/from-to.html" class="btn-hero-primary">
-        Create Invoice Free
+      <p class="cta-banner__sub">Sign in to manage and export invoices securely.</p>
+      <a href="pages/login.html" class="btn-hero-primary" id="footerCtaBtn">
+        Sign In to Continue
         <svg class="btn-arrow" viewBox="0 0 24 24" fill="none">
           <path
             d="M5 12H19M19 12L12 5M19 12L12 19"
@@ -392,5 +388,6 @@
       </div>
       <p class="lp-footer__copy">© 2026 InvoiceLy.</p>
     </footer>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>

@@ -7,6 +7,10 @@ function buildSummary() {
   const items = s.items || [];
   const taxRate = s.taxRate || 0;
   const subtotal = items.reduce((a, it) => a + it.qty * it.rate, 0);
+  const transportTotal = items.reduce((a, it) => {
+    const desc = (it.desc || '').toLowerCase();
+    return desc.includes('transport') ? a + (it.qty * it.rate) : a;
+  }, 0);
   const taxAmt   = subtotal * (taxRate / 100);
   const grand    = subtotal + taxAmt;
 
@@ -44,6 +48,7 @@ function buildSummary() {
         ['Issue Date', s.issueDate],
         ['Due Date',   s.dueDate],
         ['Currency',   s.currency],
+        ['Transport',  fmt(transportTotal)],
         ['Subtotal',   fmt(subtotal)],
         [`Tax (${taxRate}%)`, fmt(taxAmt)],
         ['Total',      fmt(grand)],

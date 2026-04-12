@@ -3,6 +3,13 @@
 
 "use strict";
 
+// if the page is opened directly as file://, hit local backend explicitly
+const API_BASE_URL = window.location.origin === "null" ? "http://localhost:7001" : "";
+
+function apiUrl(path) {
+  return `${API_BASE_URL}${path}`;
+}
+
 // tiny shorthand so we're not typing getElementById a hundred times
 function $(id) { return document.getElementById(id); }
 
@@ -109,7 +116,7 @@ function updateStrengthMeter(pw) {
     if (this.value.trim()) setFieldState(this, $("password-hint"), false);
   });
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const username = $("login-username").value.trim();
@@ -133,18 +140,58 @@ function updateStrengthMeter(pw) {
 
     if (!valid) return;
 
-    // TODO: swap this setTimeout out for a real fetch('/api/auth/login') call
-    // on 200 → store the JWT and redirect, on 401 → showToast(..., 'error')
     const btn = $("loginSubmitBtn");
+    const defaultBtnHtml = btn.innerHTML;
     btn.disabled = true;
     btn.textContent = "Signing in…";
 
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = `Sign In <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    try {
+      const res = await fetch(apiUrl("/api/auth/login"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        if (res.status === 401) {
+          showToast("loginToast", "Invalid username or password", "error");
+        } else {
+          showToast("loginToast", data.message || "Sign in failed. Please try again.", "error");
+        }
+        return;
+      }
+
+      if (!data.token) {
+        showToast("loginToast", "Login succeeded but token was missing", "error");
+        return;
+      }
+
+      const remember = $("rememberMe")?.checked;
+      const storage = remember ? localStorage : sessionStorage;
+
+      // keep only one active auth source
+      localStorage.removeItem("invoicely_token");
+      sessionStorage.removeItem("invoicely_token");
+
+      storage.setItem("invoicely_token", data.token);
+      storage.setItem("invoicely_username", username);
+
       showToast("loginToast", "Signed in successfully! Redirecting…", "success");
-    }, 1200);
+      setTimeout(() => {
+        const redirectTo = sessionStorage.getItem("invoicely_redirect_after_login") || "/pages/from-to.html";
+        sessionStorage.removeItem("invoicely_redirect_after_login");
+        window.location.href = redirectTo;
+      }, 700);
+    } catch (err) {
+      showToast("loginToast", "Server unavailable. Please try again shortly.", "error");
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = defaultBtnHtml;
+    }
   });
 })();
 
@@ -183,7 +230,7 @@ function updateStrengthMeter(pw) {
     if (this.value) setFieldState(this, $("reg-role-hint"), false);
   });
 
-  form.addEventListener("submit", function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const username = $("reg-username").value.trim();
@@ -224,17 +271,40 @@ function updateStrengthMeter(pw) {
 
     if (!valid) return;
 
-    // TODO: swap this out for fetch('/api/auth/register', { method: 'POST', body: ... })
-    // on 201 → redirect to login, on 409 → "username already taken" error toast
     const btn = $("registerSubmitBtn");
+    const defaultBtnHtml = btn.innerHTML;
     btn.disabled = true;
     btn.textContent = "Creating account…";
 
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.innerHTML = `Create Account <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-        <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+    try {
+      const res = await fetch(apiUrl("/api/auth/register"), {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ username, password, role })
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        if (res.status === 409) {
+          showToast("registerToast", "Username already exists", "error");
+        } else {
+          showToast("registerToast", data.message || "Registration failed. Please try again.", "error");
+        }
+        return;
+      }
+
       showToast("registerToast", `Account created! Welcome, ${username}!`, "success");
-    }, 1200);
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 900);
+    } catch (err) {
+      showToast("registerToast", "Server unavailable. Please try again shortly.", "error");
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = defaultBtnHtml;
+    }
   });
 })();

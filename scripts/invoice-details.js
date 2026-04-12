@@ -17,6 +17,7 @@ function loadFields() {
     if (el && s[STATE_MAP[id]]) el.value = s[STATE_MAP[id]];
   });
   if (s.logoDataUrl) showLogo(s.logoDataUrl);
+  else showLogo('../assets/logoPM.jpeg', true);
 }
 
 function saveFields() {
@@ -28,12 +29,17 @@ function saveFields() {
   State.set(data);
 }
 
-function showLogo(dataUrl) {
+function showLogo(dataUrl, showHint = false) {
   const img   = document.getElementById('logoPreviewImg');
   const label = document.getElementById('logoUploadLabel');
   img.src     = dataUrl;
   img.hidden  = false;
-  label.hidden = true;
+  if (showHint) {
+    label.hidden = false;
+    label.textContent = 'Default logo selected. Click to upload your logo';
+  } else {
+    label.hidden = true;
+  }
 }
 
 document.getElementById('logoDropZone').addEventListener('click', () => {

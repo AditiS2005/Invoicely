@@ -1,5 +1,6 @@
 // importing modules
 const express = require('express')
+const path = require('path')
 const dotenv = require('dotenv').config()
 const dbConnect = require('./config/db.Connect')
 const authRoutes = require('./routes/authRoutes')
@@ -9,6 +10,7 @@ const app = express()
 
 // Middleware
 app.use(express.json())
+app.use(express.static(path.resolve(__dirname, '..')))
 
 // Connect to database
 dbConnect()

@@ -14,6 +14,7 @@ const State = {
 // ── Currency helper ───────────────────────────────────────
 
 const CURRENCY_SYMBOLS = { USD: '$', EUR: '€', GBP: '£', INR: '₹', JPY: '¥' };
+const DEFAULT_LOGO_PATH = '../assets/logoPM.jpeg';
 
 function currencySymbol() {
   const s = State.get();
@@ -61,14 +62,9 @@ function renderPreviewLogo(dataUrl) {
   const img  = document.getElementById('prev-logo-img');
   const ph   = document.getElementById('prev-logo-placeholder');
   if (!img || !ph) return;
-  if (dataUrl) {
-    img.src = dataUrl;
-    img.hidden = false;
-    ph.hidden  = true;
-  } else {
-    img.hidden = true;
-    ph.hidden  = false;
-  }
+  img.src = dataUrl || DEFAULT_LOGO_PATH;
+  img.hidden = false;
+  ph.hidden  = true;
 }
 
 function renderPreviewItems(items, taxRate) {

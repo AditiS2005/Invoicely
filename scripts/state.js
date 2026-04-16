@@ -45,6 +45,7 @@ function renderPreview() {
   setText('prev-bank', joinDot(s.bankName, s.accountName, s.accountNumber));
   setText('prev-routing', s.routing);
   setText('prev-notes', s.paymentNotes);
+  setText('prev-signature-ts', formatSignatureTimestamp(s.signedAt));
 
   renderPreviewLogo(s.logoDataUrl);
   renderPreviewItems(s.items || [], s.taxRate || 0);
@@ -57,6 +58,22 @@ function setText(id, value) {
 
 function joinComma(...parts) { return parts.filter(Boolean).join(', '); }
 function joinDot(...parts)   { return parts.filter(Boolean).join(' · '); }
+
+function formatSignatureTimestamp(value) {
+  if (!value) return 'Date: Not signed yet';
+
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return `Date: ${value}`;
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const y = d.getUTCFullYear();
+  const m = pad(d.getUTCMonth() + 1);
+  const day = pad(d.getUTCDate());
+  const h = pad(d.getUTCHours());
+  const min = pad(d.getUTCMinutes());
+  const s = pad(d.getUTCSeconds());
+  return `Date: ${y}.${m}.${day} ${h}:${min}:${s} UTC`;
+}
 
 function renderPreviewLogo(dataUrl) {
   const img  = document.getElementById('prev-logo-img');
@@ -108,4 +125,8 @@ function markStepNav(currentSlug) {
 
 // ── PDF export ────────────────────────────────────────────
 
-function exportPDF() { window.print(); }
+function exportPDF() {
+  State.set({ signedAt: new Date().toISOString() });
+  renderPreview();
+  window.print();
+}

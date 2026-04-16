@@ -440,6 +440,7 @@
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
+  position: relative;
 }
 
 /* Header row: from + invoice title */
@@ -609,6 +610,25 @@
   padding-top: 0.9rem;
 }
 
+.prev-signature {
+  border-top: 1px dashed #d1d5db;
+  padding-top: 0.9rem;
+}
+
+.prev-signature-line {
+  color: #374151;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.prev-signature-ts {
+  margin-top: 0.35rem;
+  color: #6b7280;
+  font-size: 0.68rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+}
+
 /* ── Print ─────────────────────────────────────────────────── */
 @media print {
   .inv-nav,
@@ -631,6 +651,26 @@
   }
   .preview-document {
     box-shadow: none;
+    isolation: isolate;
+  }
+  .preview-document::before {
+    content: "DVC";
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    font-size: 9.5rem;
+    font-weight: 800;
+    letter-spacing: 0.35em;
+    color: rgba(17, 24, 39, 0.08);
+    z-index: 0;
+    pointer-events: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .preview-document > * {
+    position: relative;
+    z-index: 1;
   }
 }
 

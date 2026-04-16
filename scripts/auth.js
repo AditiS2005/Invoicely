@@ -1,20 +1,18 @@
-// auth.js — handles all the interactive bits for login & register
-// no real API calls yet, that comes once the backend is wired up
+// Manages the login and register forms, including API calls, validation feedback, and auth storage.
 
 "use strict";
 
-// if the page is opened directly as file://, hit local backend explicitly
-const API_BASE_URL = window.location.origin === "null" ? "http://localhost:7001" : "";
+// File:// previews need an explicit backend origin because the browser reports a null origin.
+const API_BASE_URL = window.location.origin === "null" ? "http://localhost:7002" : window.location.origin;
 
 function apiUrl(path) {
   return `${API_BASE_URL}${path}`;
 }
 
-// tiny shorthand so we're not typing getElementById a hundred times
+// Small helper to keep the form logic readable.
 function $(id) { return document.getElementById(id); }
 
-// swaps a password input between hidden and visible
-// also flips the eye icon and updates the aria-label for screen readers
+// Toggles password visibility and keeps the eye icon/label in sync for accessibility.
 function initPasswordToggle(input, btn) {
   if (!input || !btn) return;
   btn.addEventListener("click", () => {
@@ -26,7 +24,7 @@ function initPasswordToggle(input, btn) {
   });
 }
 
-// marks a field red (error) or green (valid) and shows/hides the hint text
+// Centralizes field feedback so the forms stay visually consistent.
 function setFieldState(inputEl, hintEl, isError) {
   if (isError) {
     inputEl.classList.add("is-invalid");
@@ -39,8 +37,7 @@ function setFieldState(inputEl, hintEl, isError) {
   }
 }
 
-// pops up a little banner at the top of the form
-// auto-dismisses after 4s so the user doesn't have to close it manually
+// Shows a transient success/error banner without forcing a page reload.
 function showToast(toastId, message, type = "success") {
   const toast = $(toastId);
   if (!toast) return;
@@ -50,7 +47,7 @@ function showToast(toastId, message, type = "success") {
   toast.className = `auth-toast auth-toast--${type} visible`;
   msgEl.textContent = message;
 
-  // different icon for error vs success — just swapping the svg path
+  // Swap the icon path instead of duplicating toast markup.
   if (type === "error") {
     iconEl.innerHTML = `<path d="M12 9v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>`;
@@ -64,8 +61,7 @@ function showToast(toastId, message, type = "success") {
   }, 4000);
 }
 
-// ─── password strength ────────────────────────────────────────────────────────
-// scoring is simple: length, uppercase, digit, special char — one point each
+// Password strength feedback is intentionally simple: length, case, digit, and symbol.
 
 const STRENGTH_LABELS = ["", "Weak", "Fair", "Good", "Strong"];
 const STRENGTH_COLORS = ["", "#f87171", "#fb923c", "#facc15", "#10b981"];
@@ -99,12 +95,11 @@ function updateStrengthMeter(pw) {
   label.style.color = STRENGTH_COLORS[score] || "var(--text-muted)";
 }
 
-// ─── login page ───────────────────────────────────────────────────────────────
-// wrapped in an IIFE so it only runs if loginForm exists on the page
+// Login form wiring is isolated so the same script can load on both auth pages.
 
 (function initLogin() {
   const form = $("loginForm");
-  if (!form) return; // we're on register, not login — nothing to do here
+  if (!form) return;
 
   initPasswordToggle($("login-password"), $("loginEyeBtn"));
 
@@ -123,7 +118,7 @@ function updateStrengthMeter(pw) {
     const password = $("login-password").value;
     let valid = true;
 
-    // basic presence check — the real validation happens server-side
+    // Client checks only cover obvious mistakes; the server still owns validation.
     if (!username) {
       setFieldState($("login-username"), $("username-hint"), true);
       valid = false;
@@ -173,7 +168,7 @@ function updateStrengthMeter(pw) {
       const remember = $("rememberMe")?.checked;
       const storage = remember ? localStorage : sessionStorage;
 
-      // keep only one active auth source
+      // Keep only one token source active so stale credentials do not linger in storage.
       localStorage.removeItem("invoicely_token");
       sessionStorage.removeItem("invoicely_token");
 
@@ -195,11 +190,11 @@ function updateStrengthMeter(pw) {
   });
 })();
 
-// ─── register page ────────────────────────────────────────────────────────────
+// Register form wiring mirrors the login flow but adds strength and confirm-password checks.
 
 (function initRegister() {
   const form = $("registerForm");
-  if (!form) return; // we're on login, not register — nothing to do here
+  if (!form) return;
 
   const pwInput      = $("reg-password");
   const confirmInput = $("reg-confirm");
@@ -207,15 +202,15 @@ function updateStrengthMeter(pw) {
   initPasswordToggle(pwInput,      $("regEyeBtn"));
   initPasswordToggle(confirmInput, $("confirmEyeBtn"));
 
-  // update the strength bar live as the user types their password
+  // Update the strength meter live so the user gets immediate feedback.
   pwInput.addEventListener("input", function () {
     updateStrengthMeter(this.value);
     if (this.value.length >= 8) setFieldState(this, $("reg-password-hint"), false);
-    // if they've already started typing the confirmation, re-check the match
+    // Re-check confirmation when the password changes so mismatch state clears quickly.
     if (confirmInput.value) checkConfirm();
   });
 
-  // keep checking confirm as they type so the mismatch clears the moment it matches
+  // Keep confirmation feedback live instead of waiting for submit.
   function checkConfirm() {
     const match = confirmInput.value === pwInput.value;
     setFieldState(confirmInput, $("reg-confirm-hint"), !match);
@@ -239,7 +234,7 @@ function updateStrengthMeter(pw) {
     const role     = $("reg-role").value;
     let valid = true;
 
-    // username needs to be at least 3 chars — anything shorter isn't useful
+    // The UX enforces a minimum length before the request is sent.
     if (username.length < 3) {
       setFieldState($("reg-username"), $("reg-username-hint"), true);
       valid = false;
@@ -261,7 +256,7 @@ function updateStrengthMeter(pw) {
       setFieldState(confirmInput, $("reg-confirm-hint"), false);
     }
 
-    // role is required because the backend uses it for RBAC
+    // Role selection is required by the current UI flow, even though the server forces standard users.
     if (!role) {
       setFieldState($("reg-role"), $("reg-role-hint"), true);
       valid = false;

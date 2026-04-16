@@ -1,26 +1,40 @@
 "use strict";
 
+// Blocks unauthenticated access to invoice pages and preserves the intended destination.
 (function protectPage() {
   const token = localStorage.getItem("invoicely_token") || sessionStorage.getItem("invoicely_token");
 
-  if (!token) {
+  function decodeBase64Url(segment) {
+    const normalized = segment.replace(/-/g, "+").replace(/_/g, "/");
+    const padded = normalized + "==".slice(0, (4 - (normalized.length % 4)) % 4);
+    return atob(padded);
+  }
+
+  function redirectToLogin() {
     sessionStorage.setItem("invoicely_redirect_after_login", window.location.pathname);
     window.location.replace("../index.html");
+  }
+
+  if (!token) {
+    redirectToLogin();
     return;
   }
 
   try {
-    const payload = JSON.parse(atob(token.split(".")[1]));
+    const parts = token.split(".");
+    if (parts.length < 2) {
+      throw new Error("Invalid token format");
+    }
+
+    const payload = JSON.parse(decodeBase64Url(parts[1]));
     if (payload.exp && Date.now() >= payload.exp * 1000) {
       localStorage.removeItem("invoicely_token");
       sessionStorage.removeItem("invoicely_token");
-      sessionStorage.setItem("invoicely_redirect_after_login", window.location.pathname);
-      window.location.replace("../index.html");
+      redirectToLogin();
     }
   } catch (_) {
     localStorage.removeItem("invoicely_token");
     sessionStorage.removeItem("invoicely_token");
-    sessionStorage.setItem("invoicely_redirect_after_login", window.location.pathname);
-    window.location.replace("../index.html");
+    redirectToLogin();
   }
 })();

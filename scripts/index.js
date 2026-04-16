@@ -1,5 +1,6 @@
 "use strict";
 
+// Keeps the landing page CTAs pointed at the sign-in flow so unauthenticated users enter through the auth gate.
 (function initLandingAuth() {
 	const navSignInBtn = document.getElementById("navSignInBtn");
 	const ctaButtons = [

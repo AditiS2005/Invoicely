@@ -1,3 +1,4 @@
+// Verifies bearer tokens and attaches the decoded user payload to the request.
 const jwt = require('jsonwebtoken')
 
 const verifyToken = (req, res, next) => {

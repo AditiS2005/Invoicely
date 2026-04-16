@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  Create polished, professional invoices in seconds — no sign-up, no cost, no data stored on any server.
+  Create polished, professional invoices in seconds with a secure, multi-step flow backed by Express and MongoDB.
 </p>
 
 <p align="center">
@@ -49,6 +49,7 @@ This project is a **full‑stack** JavaScript application combining a static fro
 - **Node.js / Express** — RESTful API powering the backend and serving the static files
 - **MongoDB & Mongoose** — Database for storing data securely
 - **JWT & Bcrypt** — Authentication, encrypted passwords, and RBAC implementation
+- **Helmet & Rate Limiting** — Basic security headers and brute-force protection on auth routes
 - **dotenv** — Environment variable management
 - **Google Fonts** — Montserrat typeface
 
@@ -104,6 +105,20 @@ Invoicely/
         ├── authRoutes.js       # Public authentication routes
         └── userRoutes.js       # Protected and role-specific routes
 ```
+
+## ⚙️ Environment
+
+Create a `.env` file with these values before starting the app:
+
+- `CONNECTION_STRING` — MongoDB connection string
+- `JWT_SECRET` — Secret used to sign authentication tokens
+- `PORT` — Optional server port, defaults to `7002`
+
+The frontend is served by the Express app in production, so keep the app on the same origin as the API.
+
+## 🧪 Tests
+
+Run `npm test` to execute the built-in Node test suite.
 
 ---
 

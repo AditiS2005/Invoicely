@@ -1,4 +1,4 @@
-/* scripts/invoice-details.js — Step 2: Invoice Details */
+// Collects invoice metadata and logo selection for the shared preview and export flow.
 
 const FIELDS = ['inv-number', 'inv-po', 'inv-issue-date', 'inv-due-date', 'inv-currency'];
 
@@ -32,6 +32,7 @@ function saveFields() {
 function showLogo(dataUrl, showHint = false) {
   const img   = document.getElementById('logoPreviewImg');
   const label = document.getElementById('logoUploadLabel');
+  // The preview always shows something so users can tell whether a logo has been chosen.
   img.src     = dataUrl;
   img.hidden  = false;
   if (showHint) {

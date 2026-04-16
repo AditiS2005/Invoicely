@@ -1,4 +1,4 @@
-/* scripts/summary.js — Step 5: Summary */
+// Renders the final invoice summary and hands off to the shared export flow.
 
 function dash(val) { return val || '—'; }
 
@@ -68,15 +68,16 @@ function buildSummary() {
   ];
 
   const container = document.getElementById('summary-cards');
+  // Escape values because these fields originate from user input and are rendered as HTML.
   container.innerHTML = cards.map(card => `
     <div class="summary-card">
       <div class="summary-card__heading">
-        ${card.title}
+        ${escapeHtml(card.title)}
         <a href="${card.editHref}">Edit →</a>
       </div>
       <dl class="summary-kv">
         ${card.fields.filter(([, v]) => v).map(([k, v]) =>
-          `<dt>${k}</dt><dd>${v}</dd>`
+          `<dt>${escapeHtml(k)}</dt><dd>${escapeHtml(v)}</dd>`
         ).join('')}
       </dl>
     </div>

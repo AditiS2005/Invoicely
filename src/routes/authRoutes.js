@@ -1,3 +1,4 @@
+// Exposes the public login and registration endpoints used by the frontend auth forms.
 const express = require('express')
 const router = express.Router()
 

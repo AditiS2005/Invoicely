@@ -1,4 +1,4 @@
-/* scripts/items.js — Step 3: Items */
+// Manages invoice line items, totals, and tax so the preview stays accurate while editing.
 
 let items = [];
 
@@ -74,6 +74,7 @@ function updateTotals() {
 }
 
 function escHtml(str) {
+  // Values are injected into row markup, so escape them before writing HTML.
   return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 

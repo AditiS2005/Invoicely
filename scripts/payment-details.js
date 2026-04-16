@@ -1,4 +1,4 @@
-/* scripts/payment-details.js — Step 4: Payment Details */
+// Persists payment instructions so the exported invoice can show settlement details.
 
 const FIELDS = ['bank-name', 'account-name', 'account-number', 'routing', 'payment-notes'];
 

@@ -1,3 +1,4 @@
+// Stores login credentials and the role used by the API's authorization checks.
 const mongoose = require('mongoose')
 
 const userSchema = new mongoose.Schema(
@@ -23,6 +24,7 @@ const userSchema = new mongoose.Schema(
 )
 
 userSchema.methods.toJSON = function () {
+  // Hide the password when a user document is serialized back to JSON.
   const user = this.toObject()
   delete user.password
   return user

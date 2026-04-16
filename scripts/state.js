@@ -1,3 +1,4 @@
+// Stores invoice draft data in localStorage and keeps the live preview synchronized.
 const STATE_KEY = 'invoicely';
 
 const State = {
@@ -15,6 +16,15 @@ const State = {
 
 const CURRENCY_SYMBOLS = { USD: '$', EUR: '€', GBP: '£', INR: '₹', JPY: '¥' };
 const DEFAULT_LOGO_PATH = '../assets/logoPM.jpeg';
+
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 
 function currencySymbol() {
   const s = State.get();
@@ -91,12 +101,13 @@ function renderPreviewItems(items, taxRate) {
   if (!items.length) {
     tbody.innerHTML = `<tr><td colspan="4" class="prev-empty-row">No items added yet</td></tr>`;
   } else {
+    // Row HTML is assembled here because the preview needs a compact table layout.
     tbody.innerHTML = items.map(it => `
       <tr>
-        <td>${it.desc || '—'}</td>
-        <td>${it.qty}</td>
-        <td>${fmt(it.rate)}</td>
-        <td>${fmt(it.qty * it.rate)}</td>
+        <td>${escapeHtml(it.desc || '—')}</td>
+        <td>${escapeHtml(it.qty)}</td>
+        <td>${escapeHtml(fmt(it.rate))}</td>
+        <td>${escapeHtml(fmt(it.qty * it.rate))}</td>
       </tr>
     `).join('');
   }

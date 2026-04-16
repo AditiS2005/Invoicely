@@ -1,4 +1,4 @@
-/* scripts/from-to.js — Step 1: From & To */
+// Captures sender and recipient details and persists them to shared invoice state.
 
 const FIELDS = [
   'from-name', 'from-address', 'from-zip', 'from-city',
@@ -35,6 +35,7 @@ function saveFields() {
   State.set(data);
 }
 
+// Persist on every edit so the preview and later steps stay in sync.
 document.addEventListener('input', () => { saveFields(); renderPreview(); });
 
 document.getElementById('nextBtn').addEventListener('click', (e) => {

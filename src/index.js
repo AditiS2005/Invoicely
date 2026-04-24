@@ -10,6 +10,9 @@ const userRoutes = require('./routes/userRoutes')
 
 const app = express()
 
+// Render runs behind a reverse proxy, so trust one hop in production.
+app.set('trust proxy', process.env.NODE_ENV === 'production' ? 1 : false)
+
 app.disable('x-powered-by')
 app.use(
   helmet({

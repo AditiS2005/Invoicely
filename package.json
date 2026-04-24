@@ -2,7 +2,7 @@
   "name": "invoicely",
   "version": "1.0.0",
   "description": "<p align=\"center\">   <img src=\"./assets/Logo.svg\" alt=\"InvoiceLy Logo\" width=\"80\" /> </p>",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
